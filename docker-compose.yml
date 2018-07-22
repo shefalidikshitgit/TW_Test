@@ -1,0 +1,26 @@
+version: "3"
+services:
+  dynamic:
+    image: companynews_dynamic
+    ports:
+      - "8080:8080"
+    networks:
+      - webnet
+    deploy:
+      replicas: 1
+    environment:
+      - VIRTUAL_HOST=dynamic
+
+  static:
+    image: companynews_static
+    depends_on:
+      - dynamic
+    ports:
+      - "80:80"
+    environment:
+      - VIRTUAL_HOST=static      
+    networks:
+      - webnet
+
+networks:
+  webnet:
