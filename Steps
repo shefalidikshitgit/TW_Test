@@ -17,6 +17,9 @@ chmod +x /usr/local/bin/docker-compose
 7. Create docker-compose.yml
 8. docker-compose up
     docker stack deploy --compose-file docker-compose.yml companynews
+    
+    Run Swarm in a single node cluster (manager and worker)
+    
     docker swarm init
     docker swarm join-token manager
     
