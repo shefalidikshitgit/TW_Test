@@ -1,0 +1,38 @@
+
+TW Test:
+
+1: Install Docker
+docker --version
+Docker version 18.03.1-ce, build 3dfb8343b139d6342acfd9975d7f1068b5b1c3d3
+2. Add user to Docker group to avoid using sudo
+   docker usermod -aG docker ec2-user
+3. Create static and dynamic docker files (attached)
+4. Build image:
+  docker build -t companynews_static .
+  docker build -t companynews_dynamic .
+5. Upload the images to registry
+6. Install docker compose
+curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+7. Create docker-compose.yml
+8. docker-compose up
+    docker stack deploy --compose-file docker-compose.yml companynews
+    docker swarm init
+    docker swarm join-token manager
+    
+    OUTPUT-
+    
+[ec2-user@ip-172-31-23-129 TW_Test]$ docker swarm init
+Swarm initialized: current node (78gvi0bzpynjfvc00ipn1cctf) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-5ofvpjm62lh63v3ffsfhj6vn7wk30p3rky4fqly02qaoemp-9bwr5zdojmu4k8o8scm9ix84a 172.31.23.129:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and fol the instructions.
+
+[ec2-user@ip-172-31-23-129 TW_Test]$ docker stack deploy --compose-file dockeompose.yml companynews
+Creating network companynews_webnet
+Creating service companynews_static
+Creating service companynews_dynamic
+[ec2-user@ip-172-31-23-129 TW_Test]$
